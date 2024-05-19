@@ -1,30 +1,35 @@
-from PyQt6.QtWidgets import QMainWindow
-from PyQt6.QtWebEngineWidgets import QWebEngineView
+from PyQt6.QtCore import Qt
+from next_page_back import go_to_next
+from PyQt6.QtWidgets import (QMainWindow, QPushButton, QVBoxLayout, QWidget, )
 
 
-class html_page(QMainWindow):
+class main_page(QMainWindow):
     def __init__(self):
         super().__init__()
-
         # Set the window title and dimensions
-        self.setWindowTitle("HTML Page")
-        self.setGeometry(150, 150, 800, 600)
-        self.setFixedSize(800, 600)
+        self.setWindowTitle("Log in")
+        self.setGeometry(100, 100, 600, 400)
+        self.setFixedSize(600, 400)
 
-        # Create a QWebEngineView and set its HTML content
-        self.browser = QWebEngineView()
-        self.browser.setHtml(
-            "<html>"
-                "<body>"
-                         "<h1>"
-                                "Hello World"
-                        "</h1>"
-                "</body>"
-            "</html>"
-        )
+        # Create a button and connect its clicked signal to the go_to_next method
+        self.button = QPushButton("login", self)
+        self.button.clicked.connect(self.handle_button_click)
+        self.button.setFixedSize(200, 50)
 
-        # Set the QWebEngineView as the central widget of the window
-        self.setCentralWidget(self.browser)
+        # Create a vertical layout and add the button to it, with the button centered
+        layout = QVBoxLayout()
+        layout.addWidget(self.button, alignment=Qt.AlignmentFlag.AlignHCenter)
+
+        # Create a widget, set its layout, and set it as the central widget of the window
+        widget = QWidget()
+        widget.setLayout(layout)
+        self.setCentralWidget(widget)
+
+    def handle_button_click(self):
+        go_to_next(self)
+
+
+
 
 
 

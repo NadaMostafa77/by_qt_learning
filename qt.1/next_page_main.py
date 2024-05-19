@@ -1,6 +1,6 @@
 import sys
 from PyQt6.QtWidgets import QApplication
-from next_page_back import main_page
+from next_page_front import main_page
 
 
 def next_page_main():
@@ -9,3 +9,7 @@ def next_page_main():
     window = main_page()
     window.show()
     sys.exit(app.exec())
+
+
+if __name__ == "__main__":
+    next_page_main()
